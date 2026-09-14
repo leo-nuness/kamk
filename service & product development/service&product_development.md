@@ -18,4 +18,15 @@ Write a short (about 2 pages) reflection and submit it into Reppu by Friday, SEP
 3. Local menu adaptation or licensing; Organic growth
 4. Brands and companies should respect local culture.
 
-## 
+## Product Develoment (product concept)
+Insights
+
+### Process of product development
+Idea generatnion
+Concept Develpment and testing
+business analysis
+prototyping/MVP
+test marketing
+launch / commercialization
+continuous development
+
