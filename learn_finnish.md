@@ -11,9 +11,26 @@ Brasiliasta - Brazillian
 
 enta sina?
 
-mina tykkaan
+mina tykkaan - i like
 
 En puhun suomea - dont speak finnish
 
 
+Introducing myself:
 
+Terve! 
+
+Huomenta! Mina olen Leonardo Nunes
+olen kotoisin brasiliasta
+mina tykkaan
+pitsasta ja lenkkeillä
+
+Minä en tykkää
+kahvista ja jalkapalloa
+
+Minä puhun
+englantia ja portugalin
+
+
+Nähdään!
+moi moi
