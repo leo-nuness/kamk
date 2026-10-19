@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VR Group: Cloud & AI Disruption Strategy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --vr-green: #00b050;
+      --vr-dark-green: #062c1d;
+      --vr-emerald: #0b3d29;
+      --vr-mint: #e8f7ee;
+      --vr-mint-light: #f0fdf4;
+      --vr-cyan: #0284c7;
+      --vr-purple: #7c3aed;
+      --vr-amber: #d97706;
+      --vr-rose: #e11d48;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #0f172a;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Fixed 16:9 Presentation Stage */
+    #presentation-stage {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      background: #ffffff;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+      border-radius: 16px;
+      overflow: hidden;
+      transform-origin: center center;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1280px;
+      height: 720px;
+      padding: 38px 56px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #ffffff;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      z-index: 10;
+    }
+
+    /* Vector Map Pattern Generator */
+    .map-pattern {
+      background-image: radial-gradient(#d1fae5 1.5px, transparent 1.5px), radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
+
+    /* Navigation toolbar at the bottom */
+    #nav-controls {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 10px 22px;
+      border-radius: 9999px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 50;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--vr-green);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Micro utility classes */
+    .heading-font {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .gauge-bg {
+      stroke: #e2e8f0;
+      stroke-width: 14;
+      fill: none;
+    }
+
+    .gauge-fill {
+      stroke-width: 14;
+      fill: none;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="presentation-stage">
+
+    <!-- ========================================== -->
+    <!-- SLIDE 1: DYNAMIC HERO TITLE                -->
+    <!-- ========================================== -->
+    <div class="slide active" id="slide1">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="38" width="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="VR Logo">
+            <g fill="none" fill-rule="evenodd">
+              <path d="M0 0h48v48H0z"/>
+              <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+            </g>
+          </svg>
+          <span class="heading-font font-extrabold text-2xl tracking-wider text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="flex items-center gap-2 bg-[#e8f7ee] px-4 py-1.5 rounded-full border border-[#00b050]/20">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#00b050]"></span>
+          <span class="text-xs font-bold text-[#065f46] tracking-wide uppercase">Business & Operations Strategy</span>
+        </div>
+      </div>
+
+      <!-- Center Content with Colorful Transit Graphic -->
+      <div class="grid grid-cols-12 gap-8 items-center my-auto">
+        <div class="col-span-7 pr-4">
+          <div class="inline-block px-3 py-1 rounded-md bg-emerald-50 text-[#00b050] text-sm font-bold uppercase tracking-wider mb-3">
+            Group Assignment: Data Sources, Cloud & AI
+          </div>
+          <h1 class="heading-font text-5xl font-extrabold text-slate-900 leading-tight tracking-tight mb-4">
+            Cloud & AI Strategy for <span class="text-[#00b050]">VR Group</span>
+          </h1>
+          <p class="text-lg text-slate-600 font-medium leading-relaxed mb-6">
+            Pioneering winter punctuality and proactive disruption care through integrated Finnish open data, scalable cloud architecture, and applied AI.
+          </p>
+
+          <!-- Agenda Track Flow -->
+          <div class="grid grid-cols-3 gap-3 pt-2 border-t border-slate-100">
+            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+              <span class="w-7 h-7 rounded-lg bg-[#e8f7ee] text-[#00b050] font-black text-xs flex items-center justify-center">01</span>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Operational Realities</p>
+                <p class="text-[10px] text-slate-500">The 70/30 Split & 9 Sources</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+              <span class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 font-black text-xs flex items-center justify-center">02</span>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Proposals A & B</p>
+                <p class="text-[10px] text-slate-500">Fleet ML & Smart Care</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+              <span class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 font-black text-xs flex items-center justify-center">03</span>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Cloud Architecture</p>
+                <p class="text-[10px] text-slate-500">Pipeline, Risks & Roadmap</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Transit Graphic & Map Art -->
+        <div class="col-span-5 relative flex items-center justify-center">
+          <div class="w-full h-80 rounded-2xl bg-gradient-to-br from-emerald-50 via-teal-50 to-sky-50 border border-emerald-100 p-6 flex flex-col justify-between relative overflow-hidden shadow-inner">
+            <!-- Vector Transit Line Graphic -->
+            <svg class="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 400 300" fill="none">
+              <!-- Grid street pattern -->
+              <path d="M0 50h400M0 120h400M0 200h400M0 260h400M60 0v300M150 0v300M260 0v300M340 0v300" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+              <!-- Green line -->
+              <path d="M-20 220 Q 120 220 180 150 T 420 80" stroke="#00b050" stroke-width="8" stroke-linecap="round"/>
+              <!-- Blue line -->
+              <path d="M120 -20 Q 150 100 240 160 T 360 320" stroke="#0284c7" stroke-width="6" stroke-linecap="round"/>
+              <!-- Red line -->
+              <path d="M30 320 Q 180 200 280 80 T 420 30" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
+              <!-- Station nodes -->
+              <circle cx="180" cy="150" r="8" fill="#ffffff" stroke="#00b050" stroke-width="4"/>
+              <circle cx="240" cy="160" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+              <circle cx="280" cy="80" r="6" fill="#ffffff" stroke="#ef4444" stroke-width="3"/>
+            </svg>
+
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="px-3 py-1 bg-white/90 backdrop-blur rounded-lg text-xs font-bold text-slate-700 shadow-sm">Finnish Passenger Rail</span>
+              <span class="px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold shadow-sm">Active Network</span>
+            </div>
+
+            <!-- Stylized Train Silhouette Badge -->
+            <div class="relative z-10 bg-white/95 backdrop-blur p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
+              <div class="w-12 h-12 rounded-lg bg-[#00b050] flex items-center justify-center text-white font-black text-xl shadow-md">
+                VR
+              </div>
+              <div>
+                <p class="text-xs uppercase font-extrabold text-slate-400 tracking-wider">National Rail Operator</p>
+                <p class="text-sm font-bold text-slate-800">Helsinki · Tampere · Oulu · Rovaniemi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 1 Footer -->
+      <div class="flex justify-between items-center pt-3 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <div>Authors: <strong class="text-slate-800">Leonardo Nunes, Jaime Montoro Sanchis, Ronja Ketelsen</strong></div>
+        <div class="flex items-center gap-4">
+          <span>Kajaani University of Applied Sciences</span>
+          <span class="font-bold text-[#00b050]">Slide 01 / 13</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 2: CONTEXT & THE 70/30 SPLIT         -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide2">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">01. Organisational Context</div>
+      </div>
+
+      <!-- Main Body: Gauges + 70/30 Split -->
+      <div class="my-auto">
+        <div class="mb-5">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">The 70/30 Rail Disruption Reality</h2>
+          <p class="text-sm text-slate-600 mt-1">Commercial momentum is strong, but external track works and winter conditions drive passenger delays.</p>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Annual Revenue</span>
+            <p class="text-2xl font-black text-slate-900 mt-1">€1,252.5M</p>
+            <span class="text-[11px] font-semibold text-emerald-600">€129.8M Comparable EBIT (2025)</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Long-Distance Trips</span>
+            <p class="text-2xl font-black text-slate-900 mt-1">16.1M</p>
+            <span class="text-[11px] font-semibold text-blue-600">All-time record volume</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Customer NPS</span>
+            <p class="text-2xl font-black text-emerald-600 mt-1">57 / 100</p>
+            <span class="text-[11px] font-semibold text-emerald-700">Significant gain (46 in 2024)</span>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Digital Sales Share</span>
+            <p class="text-2xl font-black text-slate-900 mt-1">~95%</p>
+            <span class="text-[11px] font-semibold text-purple-600">Direct digital touchpoints</span>
+          </div>
+        </div>
+
+        <!-- 3 Semicircular Gauges for 2024 Delay Causes -->
+        <div class="bg-gradient-to-r from-slate-50 to-emerald-50/40 p-5 rounded-2xl border border-slate-200">
+          <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-3 text-center">Root Causes of Long-Distance Delays (VR 2024 Results)</p>
+          <div class="grid grid-cols-3 gap-6 items-center">
+            
+            <!-- Gauge 1: 46% Track Infrastructure -->
+            <div class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+              <svg width="86" height="86" viewBox="0 0 100 100" class="shrink-0">
+                <circle cx="50" cy="50" r="38" class="gauge-bg"/>
+                <circle cx="50" cy="50" r="38" stroke="#0284c7" class="gauge-fill" stroke-dasharray="238.76" stroke-dashoffset="128.93" transform="rotate(-90 50 50)"/>
+                <text x="50" y="55" font-family="'Space Grotesk'" font-size="20" font-weight="800" text-anchor="middle" fill="#0f172a">46%</text>
+              </svg>
+              <div>
+                <span class="text-xs font-extrabold text-blue-700 uppercase">Track Infrastructure</span>
+                <p class="text-xs text-slate-600 mt-0.5">Väylävirasto switch faults, track works & electrical outages.</p>
+              </div>
+            </div>
+
+            <!-- Gauge 2: 30% VR Fleet -->
+            <div class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+              <svg width="86" height="86" viewBox="0 0 100 100" class="shrink-0">
+                <circle cx="50" cy="50" r="38" class="gauge-bg"/>
+                <circle cx="50" cy="50" r="38" stroke="#00b050" class="gauge-fill" stroke-dasharray="238.76" stroke-dashoffset="167.13" transform="rotate(-90 50 50)"/>
+                <text x="50" y="55" font-family="'Space Grotesk'" font-size="20" font-weight="800" text-anchor="middle" fill="#00b050">30%</text>
+              </svg>
+              <div>
+                <span class="text-xs font-extrabold text-emerald-700 uppercase">VR Operations & Fleet</span>
+                <p class="text-xs text-slate-600 mt-0.5">Bogie freezing, mechanical defects & depot readiness.</p>
+              </div>
+            </div>
+
+            <!-- Gauge 3: 24% Other External -->
+            <div class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+              <svg width="86" height="86" viewBox="0 0 100 100" class="shrink-0">
+                <circle cx="50" cy="50" r="38" class="gauge-bg"/>
+                <circle cx="50" cy="50" r="38" stroke="#f59e0b" class="gauge-fill" stroke-dasharray="238.76" stroke-dashoffset="181.45" transform="rotate(-90 50 50)"/>
+                <text x="50" y="55" font-family="'Space Grotesk'" font-size="20" font-weight="800" text-anchor="middle" fill="#f59e0b">24%</text>
+              </svg>
+              <div>
+                <span class="text-xs font-extrabold text-amber-700 uppercase">Other External Factors</span>
+                <p class="text-xs text-slate-600 mt-0.5">Blizzards, sub-zero cold snaps, obstacles & collisions.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Strategic Takeaway Banner -->
+        <div class="mt-4 p-3 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between">
+          <span class="text-xs font-bold text-emerald-900">
+            <strong>Key Strategic Takeaway:</strong> VR cannot stop the 70% of external delays solely with rail maintenance. It must pair internal fleet failure prevention (Proposal A) with intelligent disruption customer care (Proposal B).
+          </span>
+          <span class="px-2.5 py-1 bg-emerald-600 text-white rounded text-[11px] font-bold shrink-0 ml-3">Dual Strategy</span>
+        </div>
+      </div>
+
+      <!-- Slide 2 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Source: VR Financial Statements Release (2026) & 2024 Traffic Releases</span>
+        <span class="font-bold text-[#00b050]">Slide 02 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 3: 9 DATA SOURCES ECOSYSTEM          -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide3">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">02. Data Sources & Inventory</div>
+      </div>
+
+      <!-- Main Body: 2 Columns of Sources -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">The 9 Strategic Data Sources</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Satisfies rubric: 5 external/public sources (min 3) and 4 free open sources (min 2).</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          
+          <!-- Column 1: External Open Data (5) -->
+          <div class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-black uppercase tracking-wider text-blue-700">External Open & Public Sources (5)</span>
+                <span class="px-2 py-0.5 bg-blue-600 text-white text-[10px] font-bold rounded">CC BY 4.0 / Public</span>
+              </div>
+              
+              <div class="space-y-2.5">
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">1. Digitraffic Rail (Fintraffic)</strong>
+                    <p class="text-[11px] text-slate-500">Live GPS, speed, compositions, schedules, delay history</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 rounded text-slate-600">REST / MQTT</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">2. FMI Open Data (Meteorological Inst.)</strong>
+                    <p class="text-[11px] text-slate-500">Weather observations, snow depth, frost alerts, forecasts</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 rounded text-slate-600">Open WFS</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">3. Väylävirasto Open WFS (Infra Agency)</strong>
+                    <p class="text-[11px] text-slate-500">Rail geodata, speed limits, track switches, electrification</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 rounded text-slate-600">WFS API</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">4. Digitransit Routing (HSL / Transit)</strong>
+                    <p class="text-[11px] text-slate-500">Regional bus, tram, and metro schedules for rebooking</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 rounded text-slate-600">GraphQL</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">5. VR Public Reporting (VR Group)</strong>
+                    <p class="text-[11px] text-slate-500">Monthly traffic releases, delay shares, annual financial reports</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 rounded text-slate-600">Web / PDF</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Internal Restricted Data (4) -->
+          <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-black uppercase tracking-wider text-emerald-800">Internal Restricted Sources (4)</span>
+                <span class="px-2 py-0.5 bg-emerald-600 text-white text-[10px] font-bold rounded">Proprietary / GDPR</span>
+              </div>
+              
+              <div class="space-y-2.5">
+                <div class="bg-white p-2.5 rounded-xl border border-emerald-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">6. Ticket & Customer Register</strong>
+                    <p class="text-[11px] text-slate-500">Bookings, itineraries, seat assignments, name, contact info</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-rose-50 text-rose-700 border border-rose-200">PII / GDPR</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-emerald-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">7. Customer Surveys / NPS</strong>
+                    <p class="text-[11px] text-slate-500">Passenger Net Promoter Scores & post-journey feedback</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200">Subjective</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-emerald-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">8. Customer Care & Compensation Claims</strong>
+                    <p class="text-[11px] text-slate-500">Refund requests, free-text complaints, medical/injury notes</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-rose-50 text-rose-700 border border-rose-200">Health Data</span>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-emerald-100 shadow-xs flex justify-between items-center">
+                  <div>
+                    <strong class="text-xs text-slate-800">9. Fleet Sensor & Maintenance Data</strong>
+                    <p class="text-[11px] text-slate-500">VR FleetCare bogie vibration, temperature, pressure logs</p>
+                  </div>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200">Time-Series</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 p-2 bg-white/80 rounded-lg text-[11px] text-slate-600 border border-emerald-100">
+              🔒 <strong>Compliance Gate:</strong> Sources 6, 7 & 8 require an internal GDPR DPIA assessment.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 3 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Verified Finland Transport APIs (Fintraffic, FMI, Väylävirasto)</span>
+        <span class="font-bold text-[#00b050]">Slide 03 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 4: DATA LANDSCAPE & 10 V's          -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide4">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">03. Landscape Analysis</div>
+      </div>
+
+      <!-- Main Body: 4 Big Data Cards -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Data Landscape: The Big Data Dimensions</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Evaluated against the reference framework from Muniswamaiah et al. (2019).</p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4">
+          
+          <!-- Card 1: Velocity -->
+          <div class="p-4 rounded-2xl bg-cyan-50/60 border border-cyan-100 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-cyan-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                VEL
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">High Velocity</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Continuous real-time feeds from Digitraffic MQTT streams and moving train IoT sensors. Requires streaming ingestion (Azure Event Hubs) rather than traditional batch runs.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-cyan-200/60 text-[11px] font-bold text-cyan-800">
+              Sources: #1, #4, #9
+            </div>
+          </div>
+
+          <!-- Card 2: Variety -->
+          <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-100 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                VAR
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Format Variety</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Spans structured JSON APIs (#1), geospatial WFS layers (#3), ACID ticket records (#6), continuous time-series telemetry (#9), and unstructured text complaint emails (#8).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-purple-200/60 text-[11px] font-bold text-purple-800">
+              Demands Hybrid Storage
+            </div>
+          </div>
+
+          <!-- Card 3: Veracity -->
+          <div class="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-100 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                VER
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Veracity Split</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Operational timestamps and GPS coordinates have high veracity (ground truth). However, customer NPS surveys and complaints carry subjective and vocal-customer bias.
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-emerald-200/60 text-[11px] font-bold text-emerald-800">
+              Objective vs. Subjective
+            </div>
+          </div>
+
+          <!-- Card 4: Vulnerability -->
+          <div class="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-rose-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                VUL
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Vulnerability & GDPR</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Operational data is open, but commercial registers hold passenger PII. Compensation claims may contain GDPR Article 9 special-category health data (medical delays, injuries).
+              </p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-rose-200/60 text-[11px] font-bold text-rose-800">
+              Strict EU Cloud Boundary
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Analytical Conclusion Box -->
+        <div class="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 flex justify-between items-center">
+          <span>
+            <strong>Architectural Implication:</strong> The sheer variety and speed necessitate a <strong>Cloud Data Lake</strong> for telemetry and text, paired with a <strong>Cloud Data Warehouse</strong> for ticketing transactions.
+          </span>
+          <span class="px-2.5 py-1 bg-slate-800 text-white rounded text-[11px] font-semibold">Muniswamaiah et al. (2019)</span>
+        </div>
+      </div>
+
+      <!-- Slide 4 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Big Data Dimensions: Velocity, Variety, Veracity, Vulnerability</span>
+        <span class="font-bold text-[#00b050]">Slide 04 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 5: PROPOSAL A - PREDICTIVE MAINT.    -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide5">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">Proposal A: Fleet Operations</div>
+      </div>
+
+      <!-- Main Body: Problem -> Data -> Cloud -> AI Flow -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-[#00b050]">Strategic Initiative 1</span>
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Weather-Aware Predictive Maintenance</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Enriching internal bogie telemetry with external freezing weather and track-switch geodata.</p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4">
+          
+          <!-- Box 1: Problem -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 font-black text-xs flex items-center justify-center mb-2">01</span>
+            <h3 class="text-sm font-bold text-slate-900 mb-1">Business Problem</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Sub-zero temperatures (-30 °C), packed snow, and ice stress wheelsets and brakes. Unexpected trackside breakdowns cause cascading delays and emergency repairs costing up to 10× workshop servicing.
+            </p>
+          </div>
+
+          <!-- Box 2: Data Needed -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 font-black text-xs flex items-center justify-center mb-2">02</span>
+            <h3 class="text-sm font-bold text-slate-900 mb-1">Data Required</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Internal:</strong> Fleet sensor logs (#9: bogie vibration, temperature, pressure).<br>
+              <strong>External:</strong> FMI weather forecasts (#2: frost, blizzards) + Väylävirasto geodata (#3: track switches, speed limits).
+            </p>
+          </div>
+
+          <!-- Box 3: Cloud Services -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 font-black text-xs flex items-center justify-center mb-2">03</span>
+            <h3 class="text-sm font-bold text-slate-900 mb-1">Cloud Services (PaaS)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Azure IoT Hub / AWS IoT Core</strong> for live telemetry ingestion into an elastic <strong>Cloud Data Lake</strong>. Uses stream processing for immediate alarms and batch analytics for wear models.
+            </p>
+          </div>
+
+          <!-- Box 4: AI & Analytics -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 font-black text-xs flex items-center justify-center mb-2">04</span>
+            <h3 class="text-sm font-bold text-slate-900 mb-1">Applied AI Models</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Anomaly Detection</strong> flags abnormal vibration/heat. <strong>Predictive Analytics</strong> models correlate freezing ambient temperatures with component wear to forecast failure before it happens.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Flow diagram connector -->
+        <div class="mt-4 p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900 font-medium flex items-center justify-between">
+          <span>
+            🔄 <strong>Next-Generation Cloud Upgrade:</strong> Builds directly on VR FleetCare's existing condition monitoring by adding environmental context.
+          </span>
+          <span class="font-bold text-[#00b050]">Problem → Data → Cloud → AI</span>
+        </div>
+      </div>
+
+      <!-- Slide 5 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Target Function: Fleet Management & Rolling Stock Operations</span>
+        <span class="font-bold text-[#00b050]">Slide 05 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 6: PROPOSAL A - ROI & GOVERNANCE     -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide6">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">Proposal A: Governance & Impact</div>
+      </div>
+
+      <!-- Main Body: 3 Pillars (Deliverables, Human Decision, KPIs) -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Proposal A: Deliverables, Governance & ROI</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Balancing algorithmic precision with human workshop accountability.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          
+          <!-- Pillar 1: AI Deliverables -->
+          <div class="bg-white p-5 rounded-2xl border-2 border-emerald-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-[#00b050] font-black text-sm flex items-center justify-center">⚙️</span>
+                <h3 class="text-sm font-extrabold text-slate-900 uppercase">What AI Produces</h3>
+              </div>
+              <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600 font-bold">✓</span>
+                  <span><strong>Component Risk Scores:</strong> Real-time health index (0–100%) for bogies, bearings, and brake disks.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600 font-bold">✓</span>
+                  <span><strong>Remaining Useful Life (RUL):</strong> Mileage/stress estimates before critical component wear.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-emerald-600 font-bold">✓</span>
+                  <span><strong>Depot Servicing Alerts:</strong> Automated workshop recommendations for scheduled maintenance.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 p-2.5 bg-emerald-50 rounded-xl text-[11px] font-bold text-emerald-800">
+              Output: Actionable Maintenance Insights
+            </div>
+          </div>
+
+          <!-- Pillar 2: Human in the loop -->
+          <div class="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 font-black text-sm flex items-center justify-center">👤</span>
+                <h3 class="text-sm font-extrabold text-slate-900 uppercase">Human Authority</h3>
+              </div>
+              <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <span class="text-slate-800 font-bold">●</span>
+                  <span><strong>Physical Validation:</strong> Certified mechanics inspect physical parts before replacement—AI never replaces inspections.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-slate-800 font-bold">●</span>
+                  <span><strong>Safety Sign-Off:</strong> Workshop engineers hold legal authority for train clearance and roadworthiness.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-slate-800 font-bold">●</span>
+                  <span><strong>Central Dispatch:</strong> Operations controllers decide whether to pull a train from active timetable duty.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4 p-2.5 bg-slate-100 rounded-xl text-[11px] font-bold text-slate-700">
+              Decision: Full Human Safety Authority
+            </div>
+          </div>
+
+          <!-- Pillar 3: Measurable KPIs -->
+          <div class="bg-white p-5 rounded-2xl border-2 border-blue-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-black text-sm flex items-center justify-center">📈</span>
+                <h3 class="text-sm font-extrabold text-slate-900 uppercase">Measurable KPIs</h3>
+              </div>
+              <div class="space-y-3">
+                <div class="p-2.5 bg-blue-50/60 rounded-xl border border-blue-100">
+                  <span class="text-[10px] uppercase font-bold text-blue-600">Unplanned Downtime</span>
+                  <p class="text-base font-black text-blue-950 mt-0.5">15–20% Reduction</p>
+                  <p class="text-[11px] text-slate-600">Target decrease in technical cancellations.</p>
+                </div>
+                <div class="p-2.5 bg-blue-50/60 rounded-xl border border-blue-100">
+                  <span class="text-[10px] uppercase font-bold text-blue-600">Cost Shift</span>
+                  <p class="text-base font-black text-blue-950 mt-0.5">Emergency → Workshop</p>
+                  <p class="text-[11px] text-slate-600">Substantial reduction in expensive track repairs.</p>
+                </div>
+                <div class="p-2.5 bg-blue-50/60 rounded-xl border border-blue-100">
+                  <span class="text-[10px] uppercase font-bold text-blue-600">Fleet Availability</span>
+                  <p class="text-base font-black text-blue-950 mt-0.5">+ Punctuality Gains</p>
+                  <p class="text-[11px] text-slate-600">Higher readiness on VR-controlled 30% factor.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 6 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Measurable Impact: Reliability, Cost-Efficiency & Safety</span>
+        <span class="font-bold text-[#00b050]">Slide 06 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 7: PROPOSAL B - DELAY & CLAIMS       -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide7">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-purple-100 text-xs font-semibold text-purple-800">Proposal B: Customer Care</div>
+      </div>
+
+      <!-- Main Body: Problem + 3-Tier Appropriate AI Split -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-purple-700">Strategic Initiative 2</span>
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Smart Delay Management & Automated Claims</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Tackling passenger disruption via cloud warehouse cross-referencing and the "Appropriate AI" split.</p>
+        </div>
+
+        <!-- Problem Callout: Midsummer Disruption -->
+        <div class="p-3 bg-purple-50/70 rounded-xl border border-purple-200 mb-5 flex items-center justify-between">
+          <div class="text-xs text-purple-900">
+            <strong>The Operational Challenge:</strong> Network-wide disruptions overwhelm support desks with manual refund claims and status questions (e.g., a single Midsummer incident affected ~4,000 passengers and generated ~€200,000 in claims).
+          </div>
+          <span class="text-[11px] font-bold px-2 py-0.5 bg-purple-200 text-purple-900 rounded shrink-0 ml-3">RedBus Cloud Model</span>
+        </div>
+
+        <!-- The 3-Tier Appropriate AI Framework -->
+        <div class="grid grid-cols-3 gap-5">
+          
+          <!-- Tier 1: Predictive Delay Analytics -->
+          <div class="bg-white p-4 rounded-2xl border-2 border-blue-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-black rounded uppercase">Tier 1: Machine Learning</span>
+              <h3 class="text-sm font-bold text-slate-900 mt-2 mb-1">Delay Propagation ML</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Predictive algorithms analyze real-time Digitraffic feeds (#1) and weather alerts (#2) to forecast knock-on cumulative arrival delays across downstream stations, outperforming manual controller baselines.
+              </p>
+            </div>
+            <div class="mt-3 p-2 bg-blue-50 rounded-lg text-[11px] font-bold text-blue-800">
+              Output: Dynamic Destination ETAs
+            </div>
+          </div>
+
+          <!-- Tier 2: Deterministic Business Rules (NON-AI) -->
+          <div class="bg-white p-4 rounded-2xl border-2 border-emerald-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-black rounded uppercase">Tier 2: Deterministic Rules (No AI)</span>
+              <h3 class="text-sm font-bold text-slate-900 mt-2 mb-1">Automated Standard Refunds</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Because arrival delay is an objective truth in Digitraffic (#1), automated SQL business rules cross-check ticket records (#6) against verified arrival times. Standard delay compensation is approved instantly without AI overhead.
+              </p>
+            </div>
+            <div class="mt-3 p-2 bg-emerald-50 rounded-lg text-[11px] font-bold text-emerald-800">
+              Output: Instant Refund Approvals
+            </div>
+          </div>
+
+          <!-- Tier 3: GenAI & NLP -->
+          <div class="bg-white p-4 rounded-2xl border-2 border-purple-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-[10px] font-black rounded uppercase">Tier 3: Generative AI & NLP</span>
+              <h3 class="text-sm font-bold text-slate-900 mt-2 mb-1">Complex Claims & Rerouting</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Natural Language Processing categorizes free-text claims (#8) (hotel/taxi costs). GenAI drafts context-aware passenger disruption updates and suggests alternative regional bus/metro routes via Digitransit (#4).
+              </p>
+            </div>
+            <div class="mt-3 p-2 bg-purple-50 rounded-lg text-[11px] font-bold text-purple-800">
+              Output: Draft Replies & Custom Alerts
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 7 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Framework: Rules Where Rules Work · AI Where Complexity Demands It</span>
+        <span class="font-bold text-[#00b050]">Slide 07 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 8: PROPOSAL B - GOVERNANCE & IMPACT  -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide8">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">Proposal B: Governance & Impact</div>
+      </div>
+
+      <!-- Main Body: Process Comparison & KPIs -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Transforming the Disruption Customer Journey</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Moving from slow, reactive backlogs to automated resolution with human empathy.</p>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6 items-stretch">
+          
+          <!-- Left: Automated vs. Human Track -->
+          <div class="col-span-7 bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col justify-between">
+            <h3 class="text-xs font-black uppercase tracking-wider text-slate-500 mb-3">Service Process Division</h3>
+            
+            <div class="space-y-3">
+              <!-- Automated Track -->
+              <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-xs">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-extrabold text-emerald-800">⚡ Automated Fast Track (No Waiting)</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded">Seconds to Minutes</span>
+                </div>
+                <p class="text-xs text-slate-600">
+                  Standard delays (>60 min) automatically trigger push notification refunds. Disrupted travelers receive personalized alternative connection routes on their phones before arriving at the station.
+                </p>
+              </div>
+
+              <!-- Human Review Gate -->
+              <div class="bg-white p-3.5 rounded-xl border border-purple-200 shadow-xs">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-extrabold text-purple-900">🛡️ Human Support Agent Review (Empathy Gate)</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 bg-purple-100 text-purple-800 rounded">Protected Authority</span>
+                </div>
+                <p class="text-xs text-slate-600">
+                  Support staff review hotel expenses, taxi reimbursements, and any sensitive claims involving medical emergencies or passenger injuries. Managers authorize emergency bus contracts and mass broadcasts.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-3 p-2 bg-emerald-50/70 rounded-lg text-[11px] text-emerald-900 font-semibold">
+              🔒 <strong>Ethics Guarantee:</strong> AI assists agents by drafting responses, but humans hold final approval over complex payouts and claim rejections.
+            </div>
+          </div>
+
+          <!-- Right: Measurable Benefits (KPIs) -->
+          <div class="col-span-5 bg-gradient-to-br from-purple-50 via-slate-50 to-blue-50 p-5 rounded-2xl border border-purple-100 flex flex-col justify-between">
+            <h3 class="text-xs font-black uppercase tracking-wider text-purple-900 mb-3">Measurable Business KPIs</h3>
+            
+            <div class="space-y-3">
+              <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
+                <span class="text-[10px] font-bold uppercase text-slate-400">Claim Turnaround Time</span>
+                <p class="text-lg font-black text-slate-900 mt-0.5">Days → Minutes</p>
+                <p class="text-[11px] text-slate-500">Instant resolution for clear-cut delays.</p>
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
+                <span class="text-[10px] font-bold uppercase text-slate-400">First Contact Resolution (FCR)</span>
+                <p class="text-lg font-black text-emerald-600 mt-0.5">+30–40% Increase</p>
+                <p class="text-[11px] text-slate-500">Eliminates repeat phone calls during winter storms.</p>
+              </div>
+
+              <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
+                <span class="text-[10px] font-bold uppercase text-slate-400">Disrupted Passenger NPS</span>
+                <p class="text-lg font-black text-purple-600 mt-0.5">Preserving Customer Loyalty</p>
+                <p class="text-[11px] text-slate-500">Proactive communication turns bad trips into positive brand recovery.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 8 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Measurable Impact: First Contact Resolution, Faster Refunds & Disrupted NPS</span>
+        <span class="font-bold text-[#00b050]">Slide 08 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 9: UNIFIED SYSTEM ARCHITECTURE       -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide9">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-600">04. Cloud & Big Data Architecture</div>
+      </div>
+
+      <!-- Main Body: 5-Stage Visual Architecture Pipeline -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Unified Cloud & AI Architecture</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Input-Process-Output pipeline based on Muniswamaiah et al. (2019) supporting both proposals.</p>
+        </div>
+
+        <div class="grid grid-cols-5 gap-3.5 items-stretch">
+          
+          <!-- Column 1: Ingestion / Inputs -->
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">1. Data Ingestion</span>
+              <h4 class="text-xs font-bold text-slate-900 mt-1 mb-2">Multi-Source Feeds</h4>
+              <div class="space-y-1.5 text-[11px]">
+                <div class="p-1.5 bg-white rounded-lg border border-slate-200">
+                  <strong class="text-blue-700">Open APIs:</strong> Digitraffic MQTT, FMI Weather WFS, Väylävirasto WFS.
+                </div>
+                <div class="p-1.5 bg-white rounded-lg border border-slate-200">
+                  <strong class="text-emerald-700">Internal Data:</strong> VR FleetCare IoT, Ticketing DB, Claims CRM.
+                </div>
+              </div>
+            </div>
+            <div class="text-[10px] text-slate-500 mt-2 font-medium">REST, MQTT & WFS</div>
+          </div>
+
+          <!-- Column 2: Ingestion & Privacy Gate -->
+          <div class="p-3.5 rounded-2xl bg-blue-50/60 border border-blue-100 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-blue-700">2. PaaS Ingestion</span>
+              <h4 class="text-xs font-bold text-slate-900 mt-1 mb-2">Streaming & ETL</h4>
+              <div class="space-y-1.5 text-[11px]">
+                <div class="p-1.5 bg-white rounded-lg border border-blue-100">
+                  <strong>Event Hubs / IoT Hub:</strong> Managed PaaS handles peak winter streaming loads.
+                </div>
+                <div class="p-1.5 bg-rose-50 rounded-lg border border-rose-100 text-rose-900">
+                  <strong>GDPR Privacy Gate:</strong> Automated PII anonymization & health-data filter.
+                </div>
+              </div>
+            </div>
+            <div class="text-[10px] text-blue-700 mt-2 font-bold">Managed PaaS Pipeline</div>
+          </div>
+
+          <!-- Column 3: Storage Tier -->
+          <div class="p-3.5 rounded-2xl bg-purple-50/60 border border-purple-100 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-purple-700">3. Hybrid Storage</span>
+              <h4 class="text-xs font-bold text-slate-900 mt-1 mb-2">Lake & Warehouse</h4>
+              <div class="space-y-1.5 text-[11px]">
+                <div class="p-1.5 bg-white rounded-lg border border-purple-100">
+                  <strong>Cloud Data Lake:</strong> Scalable NoSQL store for raw IoT sensor time-series & text.
+                </div>
+                <div class="p-1.5 bg-white rounded-lg border border-purple-100">
+                  <strong>Cloud Data Warehouse:</strong> Google BigQuery / Snowflake for ACID ticket queries.
+                </div>
+              </div>
+            </div>
+            <div class="text-[10px] text-purple-700 mt-2 font-bold">EU Cloud Region</div>
+          </div>
+
+          <!-- Column 4: Analytics & AI Tier -->
+          <div class="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-100 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800">4. AI & Analytics</span>
+              <h4 class="text-xs font-bold text-slate-900 mt-1 mb-2">Models & Rules</h4>
+              <div class="space-y-1.5 text-[11px]">
+                <div class="p-1.5 bg-white rounded-lg border border-emerald-100">
+                  <strong>Proposal A:</strong> Stream Anomaly Detection & Predictive RUL models.
+                </div>
+                <div class="p-1.5 bg-white rounded-lg border border-emerald-100">
+                  <strong>Proposal B:</strong> Delay ML + Deterministic SQL Rules + GenAI NLP.
+                </div>
+              </div>
+            </div>
+            <div class="text-[10px] text-emerald-800 mt-2 font-bold">AaaS / PaaS Engine</div>
+          </div>
+
+          <!-- Column 5: Human in the loop & Outputs -->
+          <div class="p-3.5 rounded-2xl bg-slate-900 text-white flex flex-col justify-between shadow-sm">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">5. Human Action</span>
+              <h4 class="text-xs font-bold text-white mt-1 mb-2">Operational Decisions</h4>
+              <div class="space-y-1.5 text-[11px]">
+                <div class="p-1.5 bg-slate-800 rounded-lg border border-slate-700">
+                  <strong>Mechanics:</strong> Approve depot repairs & safety clearances.
+                </div>
+                <div class="p-1.5 bg-slate-800 rounded-lg border border-slate-700">
+                  <strong>Support Agents:</strong> Approve complex refunds; send push ETA alerts.
+                </div>
+              </div>
+            </div>
+            <div class="text-[10px] text-emerald-400 mt-2 font-bold">Final Human Sign-Off</div>
+          </div>
+
+        </div>
+
+        <!-- Architecture Bottom Banner -->
+        <div class="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 flex justify-between items-center">
+          <span>
+            <strong>Cloud Integration Design:</strong> Separates high-frequency sensor ingestion (PaaS) from heavy analytics (AaaS), ensuring 99.9% uptime during severe winter blizzards.
+          </span>
+          <span class="font-bold text-[#00b050]">Input → Process → Output</span>
+        </div>
+      </div>
+
+      <!-- Slide 9 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Cloud Services: PaaS Streaming · Hybrid Storage · AaaS Machine Learning</span>
+        <span class="font-bold text-[#00b050]">Slide 09 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 10: RISKS & FEASIBILITY (PART 1)     -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide10">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-rose-100 text-xs font-semibold text-rose-800">05. Governance & Feasibility (1/2)</div>
+      </div>
+
+      <!-- Main Body: 3 Risk Cards (Privacy, Ethics, Bias) -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Risks & Feasibility: Privacy, Ethics & Trust</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Rigorous compliance covering customer data and workplace decision-making.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          
+          <!-- Risk 1: GDPR & Privacy -->
+          <div class="p-5 rounded-2xl bg-white border-2 border-rose-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-rose-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                GDPR
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">GDPR & Health Data</h3>
+              <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>
+                  <strong>Risk:</strong> Ticket registers (#6) contain passenger contact info. Compensation claims (#8) may contain <strong>sensitive health data</strong> (missed medical appointments, injuries during travel).
+                </p>
+                <p>
+                  <strong>Mitigation:</strong> Process all data strictly within <strong>EU cloud regions</strong>. Execute a full Data Protection Impact Assessment (DPIA). Apply automated PII redaction before LLM processing.
+                </p>
+              </div>
+            </div>
+            <div class="mt-3 p-2 bg-rose-50 rounded-lg text-[11px] font-bold text-rose-900">
+              Mandatory DPIA & Strict RBAC
+            </div>
+          </div>
+
+          <!-- Risk 2: Ethics -->
+          <div class="p-5 rounded-2xl bg-white border-2 border-amber-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500 text-white font-black text-sm flex items-center justify-center mb-3">
+                ETH
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Workplace & Consumer Ethics</h3>
+              <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>
+                  <strong>Risk:</strong> Algorithmic alerts could place undue pressure on depot mechanics or result in unfair automated rejections of complex customer refund claims.
+                </p>
+                <p>
+                  <strong>Mitigation:</strong> Position AI strictly as assistive decision support. Prohibit algorithmic scoring of workshop/support staff. Require human sign-off on all non-standard claim rejections.
+                </p>
+              </div>
+            </div>
+            <div class="mt-3 p-2 bg-amber-50 rounded-lg text-[11px] font-bold text-amber-900">
+              No Automated Claim Rejections
+            </div>
+          </div>
+
+          <!-- Risk 3: AI Errors & Bias -->
+          <div class="p-5 rounded-2xl bg-white border-2 border-blue-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                AI
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">AI Errors & Model Bias</h3>
+              <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>
+                  <strong>Risk:</strong> IoT models risk false alarms during rare blizzards (unnecessary train withdrawals). Free-text GenAI risks hallucinating incorrect regional bus routes.
+                </p>
+                <p>
+                  <strong>Mitigation:</strong> Ground GenAI strictly in verified live timetable APIs (RAG architecture). Enforce model confidence thresholds and require technician inspection before repairs.
+                </p>
+              </div>
+            </div>
+            <div class="mt-3 p-2 bg-blue-50 rounded-lg text-[11px] font-bold text-blue-900">
+              API Grounding & Confidence Scores
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 10 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Governance: GDPR Article 9 Compliance · Human-in-the-Loop Safeguards</span>
+        <span class="font-bold text-[#00b050]">Slide 10 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 11: RISKS & FEASIBILITY (PART 2)     -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide11">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-blue-100 text-xs font-semibold text-blue-800">05. Governance & Feasibility (2/2)</div>
+      </div>
+
+      <!-- Main Body: 3 Technical Cards (Cost, Quality, Lock-In) -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">Risks & Feasibility: Cost, Quality & Multi-Cloud</h2>
+          <p class="text-sm text-slate-600 mt-0.5">Managing implementation budgets, arctic sensor reliability, and vendor portability.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          
+          <!-- Card 1: Cost & Skills -->
+          <div class="p-5 rounded-2xl bg-white border-2 border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-slate-800 text-white font-black text-sm flex items-center justify-center mb-3">
+                €
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Cost & Specialized Talent</h3>
+              <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>
+                  <strong>Risk:</strong> Upfront IoT retrofitting on legacy trains and continuous streaming cloud compute fees can escalate; scarce MLOps and cloud engineering skills.
+                </p>
+                <p>
+                  <strong>Mitigation:</strong> Adopt pay-as-you-go PaaS/AaaS tools with strict automated budget alarms. Launch a narrow corridor pilot on the <strong>Helsinki–Oulu line</strong> before nationwide scaling.
+                </p>
+              </div>
+            </div>
+            <div class="mt-3 p-2 bg-slate-100 rounded-lg text-[11px] font-bold text-slate-800">
+              Phased Route Pilot Strategy
+            </div>
+          </div>
+
+          <!-- Card 2: Data Quality & Heterogeneity -->
+          <div class="p-5 rounded-2xl bg-white border-2 border-cyan-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-cyan-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                QLT
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Data Quality & Heterogeneity</h3>
+              <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>
+                  <strong>Risk:</strong> Sub-zero (-30 °C) arctic sensor dropouts (#9) and structural heterogeneity when joining JSON (#1), WFS (#2, #3), GraphQL (#4), and free text (#8).
+                </p>
+                <p>
+                  <strong>Mitigation:</strong> Implement automated data cleaning at the ingestion layer to filter noisy sensor signals. Standardize all data models using shared keys: <em>train number, station code, and UTC timestamp</em>.
+                </p>
+              </div>
+            </div>
+            <div class="mt-3 p-2 bg-cyan-50 rounded-lg text-[11px] font-bold text-cyan-900">
+              Unified Data Catalogue & Keys
+            </div>
+          </div>
+
+          <!-- Card 3: Vendor Dependency -->
+          <div class="p-5 rounded-2xl bg-white border-2 border-purple-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-600 text-white font-black text-sm flex items-center justify-center mb-3">
+                PORT
+              </div>
+              <h3 class="text-sm font-bold text-slate-900">Platform & Vendor Lock-In</h3>
+              <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>
+                  <strong>Risk:</strong> Over-reliance on proprietary cloud AI APIs (Azure/AWS) and vulnerability to licensing changes in Fintraffic's open APIs.
+                </p>
+                <p>
+                  <strong>Mitigation:</strong> Deploy models inside portable <strong>Docker/Kubernetes containers</strong>. Store analytical data in open table formats (Parquet) and maintain open REST API compatibility across clouds.
+                </p>
+              </div>
+            </div>
+            <div class="mt-3 p-2 bg-purple-50 rounded-lg text-[11px] font-bold text-purple-900">
+              Containerized Multi-Cloud Architecture
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 11 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Feasibility: Phased Investment · Data Normalization · Open Standards</span>
+        <span class="font-bold text-[#00b050]">Slide 11 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 12: 90-DAY PILOT & R&D QUESTIONS     -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide12">
+      <!-- Header -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="34" width="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#00b050"/>
+          </svg>
+          <span class="heading-font font-bold text-xl text-[#00b050]">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-emerald-100 text-xs font-semibold text-emerald-800">06. Implementation Roadmap</div>
+      </div>
+
+      <!-- Main Body: 90-Day Chevron + 3 R&D Questions -->
+      <div class="my-auto">
+        <div class="mb-4">
+          <h2 class="heading-font text-3xl font-extrabold text-slate-900 tracking-tight">90-Day Pilot & Questions for VR R&D</h2>
+          <p class="text-sm text-slate-600 mt-0.5">A structured proof-of-concept roadmap on the Helsinki–Oulu passenger corridor.</p>
+        </div>
+
+        <!-- 30 / 60 / 90 Day Chevrons -->
+        <div class="grid grid-cols-3 gap-4 mb-5">
+          <div class="p-4 rounded-xl bg-slate-50 border-2 border-slate-200">
+            <span class="px-2 py-0.5 bg-slate-800 text-white rounded text-[10px] font-black uppercase">Days 1–30: Foundation</span>
+            <h4 class="text-xs font-bold text-slate-900 mt-2 mb-1">Data Keys & Privacy Gate</h4>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              Harmonize shared keys (train ID, station code, UTC time) across Digitraffic, FMI, and internal VR databases. Complete the mandatory GDPR DPIA assessment.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-blue-50/60 border-2 border-blue-200">
+            <span class="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-black uppercase">Days 31–60: Prototype</span>
+            <h4 class="text-xs font-bold text-slate-900 mt-2 mb-1">Back-Testing & Validation</h4>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              Back-test the delay ML model against historical Digitraffic controller baselines. Validate deterministic SQL claim rules against past Helsinki–Oulu disruptions.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50/60 border-2 border-emerald-200">
+            <span class="px-2 py-0.5 bg-emerald-600 text-white rounded text-[10px] font-black uppercase">Days 61–90: Pilot</span>
+            <h4 class="text-xs font-bold text-slate-900 mt-2 mb-1">Live Shadow Operations</h4>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              Run a live shadow-mode pilot on the Helsinki–Oulu line with depot mechanics (Proposal A) and customer care agents (Proposal B) to measure time savings.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Specific Questions for VR R&D Staff (Required by Prompt) -->
+        <div class="bg-gradient-to-r from-slate-50 to-emerald-50/50 p-4 rounded-2xl border border-slate-200">
+          <span class="text-xs font-black uppercase tracking-wider text-slate-600 mb-2 block">
+            3 Strategic Questions for VR Group R&D Staff:
+          </span>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs">
+              <span class="font-extrabold text-[#00b050]">Q1 (Operations):</span>
+              <p class="text-slate-600 mt-1"><em>"Do you already forecast downstream delays beyond Fintraffic's baseline estimates, and how are those predictions used operationally?"</em></p>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs">
+              <span class="font-extrabold text-blue-600">Q2 (Customer Care):</span>
+              <p class="text-slate-600 mt-1"><em>"What percentage of delay compensation claims is currently automated via business rules versus handled manually by support staff?"</em></p>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs">
+              <span class="font-extrabold text-purple-600">Q3 (FleetCare):</span>
+              <p class="text-slate-600 mt-1"><em>"How is VR FleetCare's existing bogie telemetry integrated with external weather and track-infrastructure datasets today?"</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12 Footer -->
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
+        <span>Execution: 90-Day Phased Corridor Deployment</span>
+        <span class="font-bold text-[#00b050]">Slide 12 / 13</span>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 13: CONCLUSION & REFERENCES          -->
+    <!-- ========================================== -->
+    <div class="slide" id="slide13" style="background:#062c1d; color:#ffffff;">
+      <!-- Header with White/Mint VR Logo -->
+      <div class="flex justify-between items-center w-full">
+        <div class="flex items-center gap-3">
+          <svg height="38" width="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M41.041 34.5c-2.704 0-3.884-1.34-4.67-2.605l-.476-.77c-.8-1.35-1.62-2.238-3.902-2.238h-5.801l2.043-3.309c.59-.955 1.814-2.577 4.694-2.577h6.712c.578 0 1.764-.493 1.764-1.797 0-1.387-1.189-1.824-1.764-1.824h-8.802c-3.043 0-4.208 1.826-4.673 2.585l-6.121 9.902c-1.02 1.675-2.5 2.627-4.35 2.627-1.839 0-3.328-1.072-4.346-2.627L0 13.5h4.633c2.323 0 3.738 1.041 4.692 2.59l6.353 10.28 6.342-10.273c.775-1.296 2.113-2.597 4.697-2.597h13.891c4.085 0 7.392 3.407 7.392 7.704 0 3.597-2.23 6.562-5.38 7.454l-.281.08 3.562 5.762h-4.86z" fill="#34d399"/>
+          </svg>
+          <span class="heading-font font-extrabold text-2xl tracking-wider text-emerald-400">VR GROUP</span>
+        </div>
+        <div class="px-3 py-1 rounded-full bg-emerald-950 text-xs font-semibold text-emerald-300 border border-emerald-800">Conclusion & References</div>
+      </div>
+
+      <!-- Main Body: Strategic Summary & Citations -->
+      <div class="my-auto">
+        <div class="grid grid-cols-12 gap-8 items-center">
+          
+          <!-- Left: Strategy Recap -->
+          <div class="col-span-6">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">Executive Summary</span>
+            <h2 class="heading-font text-4xl font-extrabold text-white mt-1 mb-4 leading-tight">
+              Real Problem · Real Data · Appropriate AI
+            </h2>
+            <p class="text-sm text-emerald-100/80 leading-relaxed mb-4">
+              By pairing weather-aware predictive maintenance for rolling stock with proactive disruption customer care, VR Group can turn winter rail disruptions from a brand liability into an international benchmark for operational excellence.
+            </p>
+            <div class="p-4 bg-emerald-900/60 rounded-xl border border-emerald-700/60 text-xs text-emerald-200">
+              <strong>Final Group Takeaway:</strong> Technology only succeeds when paired with clear human decision-making authority—mechanics in the workshops and agents at the support desks.
+            </div>
+          </div>
+
+          <!-- Right: Formal Citations & References -->
+          <div class="col-span-6 bg-emerald-950/80 p-5 rounded-2xl border border-emerald-800/80">
+            <h3 class="text-xs font-black uppercase tracking-wider text-emerald-300 mb-3">Academic & Industry References</h3>
+            <div class="space-y-2 text-[11px] text-emerald-100/70 leading-relaxed">
+              <p>• <strong>Muniswamaiah, M., Agerwala, T., & Tappert, C. (2019).</strong> Big Data in Cloud Computing: Review and Opportunities. <em>IJCSIT</em>, 11(4), 43–57.</p>
+              <p>• <strong>Digitraffic Rail (2026).</strong> Open API service overview & live MQTT feeds (Fintraffic, CC BY 4.0).</p>
+              <p>• <strong>Finnish Meteorological Institute (2026).</strong> FMI Open Data WFS weather observations & forecasts.</p>
+              <p>• <strong>Väylävirasto (2026).</strong> Finnish Transport Infrastructure Agency Open WFS rail geodata.</p>
+              <p>• <strong>VR Group (2025–2026).</strong> Financial statements release 2025, 2024 punctuality reports, and Privacy Notice.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Slide 13 Footer -->
+      <div class="flex justify-between items-center pt-3 border-t border-emerald-800/80 text-xs text-emerald-300/80">
+        <div>Presented by: <strong class="text-white">Leonardo Nunes, Jaime Montoro Sanchis, Ronja Ketelsen</strong></div>
+        <div class="font-bold text-emerald-400">Slide 13 / 13</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation Controls Bar -->
+  <div id="nav-controls">
+    <button class="nav-btn" id="prev-btn" onclick="prevSlide()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      Prev
+    </button>
+    
+    <div class="text-xs font-bold text-slate-300 px-3 tracking-wide" id="slide-indicator">
+      Slide 1 / 13
+    </div>
+
+    <button class="nav-btn" id="next-btn" onclick="nextSlide()">
+      Next
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <div class="w-px h-5 bg-slate-600 mx-1"></div>
+
+    <button class="nav-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+    </button>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 13;
+
+    function showSlide(index) {
+      if (index < 1) index = 1;
+      if (index > totalSlides) index = totalSlides;
+
+      // Hide all slides
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide${i}`);
+        if (slide) {
+          slide.classList.remove('active');
+        }
+      }
+
+      // Show targeted slide
+      const target = document.getElementById(`slide${index}`);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      currentSlide = index;
+      document.getElementById('slide-indicator').textContent = `Slide ${currentSlide} / ${totalSlides}`;
+      document.getElementById('prev-btn').disabled = (currentSlide === 1);
+      document.getElementById('next-btn').disabled = (currentSlide === totalSlides);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function toggleFullscreen() {
+      const stage = document.getElementById('presentation-stage');
+      if (!document.fullscreenElement) {
+        if (stage.requestFullscreen) {
+          stage.requestFullscreen();
+        } else if (stage.webkitRequestFullscreen) {
+          stage.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+
+    // Responsive scaling to fit window nicely while preserving 16:9
+    function resizeStage() {
+      const stage = document.getElementById('presentation-stage');
+      const padding = 60;
+      const availableWidth = window.innerWidth - padding;
+      const availableHeight = window.innerHeight - padding - 60; // leave space for controls
+      
+      const scaleX = availableWidth / 1280;
+      const scaleY = availableHeight / 720;
+      const scale = Math.min(scaleX, scaleY, 1); // do not upscale beyond 1280x720
+
+      stage.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', resizeStage);
+    window.addEventListener('load', () => {
+      showSlide(1);
+      resizeStage();
+    });
+  </script>
+</body>
+</html>
