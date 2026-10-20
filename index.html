@@ -139,6 +139,78 @@
       stroke-linecap: round;
       transition: stroke-dashoffset 1s ease-out;
     }
+
+    /* Print & PDF Export Rules */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Completely hide navigation toolbar, buttons, and keys */
+      #nav-controls, #nav-controls * {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+
+      #presentation-stage {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+        transform: none !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Expand all 13 slides so each forms an individual print/PDF page */
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        max-height: 100vh !important;
+        opacity: 1 !important;
+        z-index: 1 !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        padding: 38px 56px !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .slide:last-child, #slide13 {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1449,7 +1521,15 @@
 
     <div class="w-px h-5 bg-slate-600 mx-1"></div>
 
-    <button class="nav-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+    <button class="nav-btn" onclick="exportPresentationPDF()" title="Export All Slides to PDF (or press P)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+        <path d="M6 14h12v8H6z"/>
+      </svg>
+      Export PDF
+    </button>
+
+    <button class="nav-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen (or press F)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
     </button>
   </div>
@@ -1509,6 +1589,10 @@
       }
     }
 
+    function exportPresentationPDF() {
+      window.print();
+    }
+
     // Keyboard navigation
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
@@ -1517,6 +1601,8 @@
         prevSlide();
       } else if (e.key === 'f' || e.key === 'F') {
         toggleFullscreen();
+      } else if ((e.key === 'p' || e.key === 'P') && !e.ctrlKey && !e.metaKey) {
+        exportPresentationPDF();
       }
     });
 
