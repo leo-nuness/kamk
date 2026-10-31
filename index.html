@@ -600,7 +600,7 @@
               </div>
               <h3 class="text-sm font-bold text-slate-900">High Velocity</h3>
               <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                Continuous real-time feeds from Digitraffic MQTT streams and moving train IoT sensors. Requires streaming ingestion (Azure Event Hubs) rather than traditional batch runs.
+                Continuous real-time feeds from Digitraffic API streams and moving train IoT sensors. Requires streaming ingestion (Azure Event Hubs) rather than traditional batch runs.
               </p>
             </div>
             <div class="mt-3 pt-2 border-t border-cyan-200/60 text-[11px] font-bold text-cyan-800">
@@ -616,7 +616,7 @@
               </div>
               <h3 class="text-sm font-bold text-slate-900">Format Variety</h3>
               <p class="text-xs text-slate-600 mt-1 leading-relaxed">
-                Spans structured JSON APIs (#1), geospatial WFS layers (#3), ACID ticket records (#6), continuous time-series telemetry (#9), and unstructured text complaint emails (#8).
+                Spans structured JSON APIs (#1), geospatial map layers (#3), high-quality ticket records (#6), continuous time-series telemetry (#9), and unstructured text complaint emails (#8).
               </p>
             </div>
             <div class="mt-3 pt-2 border-t border-purple-200/60 text-[11px] font-bold text-purple-800">
@@ -723,7 +723,7 @@
             <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 font-black text-xs flex items-center justify-center mb-2">03</span>
             <h3 class="text-sm font-bold text-slate-900 mb-1">Cloud Services (PaaS)</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              <strong>Azure IoT Hub / AWS IoT Core</strong> for live telemetry ingestion into an elastic <strong>Cloud Data Lake</strong>. Uses stream processing for immediate alarms and batch analytics for wear models.
+              Platform for live telemetry ingestion into an elastic <strong>Cloud Data Lake</strong>. Uses stream processing for immediate alarms and batch analytics for wear models.
             </p>
           </div>
 
@@ -788,7 +788,7 @@
               <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
                 <li class="flex items-start gap-2">
                   <span class="text-emerald-600 font-bold">✓</span>
-                  <span><strong>Component Risk Scores:</strong> Real-time health index (0–100%) for bogies, bearings, and brake disks.</span>
+                  <span><strong>Component Risk Scores:</strong> Real-time health index for bogies, brake disks and other high degradating parts.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-emerald-600 font-bold">✓</span>
@@ -923,7 +923,7 @@
               <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-black rounded uppercase">Tier 2: Deterministic Rules (No AI)</span>
               <h3 class="text-sm font-bold text-slate-900 mt-2 mb-1">Automated Standard Refunds</h3>
               <p class="text-xs text-slate-600 leading-relaxed">
-                Because arrival delay is an objective truth in Digitraffic (#1), automated SQL business rules cross-check ticket records (#6) against verified arrival times. Standard delay compensation is approved instantly without AI overhead.
+                Because arrival delay is an objective truth in Digitraffic (#1), automated database business rules cross-check ticket records (#6) against verified arrival times. Standard delay compensation is approved instantly without AI overhead.
               </p>
             </div>
             <div class="mt-3 p-2 bg-emerald-50 rounded-lg text-[11px] font-bold text-emerald-800">
@@ -1078,7 +1078,7 @@
               <h4 class="text-xs font-bold text-slate-900 mt-1 mb-2">Multi-Source Feeds</h4>
               <div class="space-y-1.5 text-[11px]">
                 <div class="p-1.5 bg-white rounded-lg border border-slate-200">
-                  <strong class="text-blue-700">Open APIs:</strong> Digitraffic MQTT, FMI Weather WFS, Väylävirasto WFS.
+                  <strong class="text-blue-700">Open APIs:</strong> Digitraffic APIs, FMI Weather API, Väylävirasto API.
                 </div>
                 <div class="p-1.5 bg-white rounded-lg border border-slate-200">
                   <strong class="text-emerald-700">Internal Data:</strong> VR FleetCare IoT, Ticketing DB, Claims CRM.
@@ -1112,7 +1112,7 @@
               <h4 class="text-xs font-bold text-slate-900 mt-1 mb-2">Lake & Warehouse</h4>
               <div class="space-y-1.5 text-[11px]">
                 <div class="p-1.5 bg-white rounded-lg border border-purple-100">
-                  <strong>Cloud Data Lake:</strong> Scalable NoSQL store for raw IoT sensor time-series & text.
+                  <strong>Cloud Data Lake:</strong> Scalable database store for raw IoT sensor time-series & text.
                 </div>
                 <div class="p-1.5 bg-white rounded-lg border border-purple-100">
                   <strong>Cloud Data Warehouse:</strong> Google BigQuery / Snowflake for ACID ticket queries.
@@ -1132,7 +1132,7 @@
                   <strong>Proposal A:</strong> Stream Anomaly Detection & Predictive RUL models.
                 </div>
                 <div class="p-1.5 bg-white rounded-lg border border-emerald-100">
-                  <strong>Proposal B:</strong> Delay ML + Deterministic SQL Rules + GenAI NLP.
+                  <strong>Proposal B:</strong> Delay ML + Deterministic Rules + GenAI NLP.
                 </div>
               </div>
             </div>
@@ -1325,7 +1325,7 @@
               <h3 class="text-sm font-bold text-slate-900">Data Quality & Heterogeneity</h3>
               <div class="mt-2 text-xs text-slate-600 space-y-2 leading-relaxed">
                 <p>
-                  <strong>Risk:</strong> Sub-zero (-30 °C) arctic sensor dropouts (#9) and structural heterogeneity when joining JSON (#1), WFS (#2, #3), GraphQL (#4), and free text (#8).
+                  <strong>Risk:</strong> Sub-zero (-30 °C) arctic sensor dropouts (#9) and structural heterogeneity when joining different format databases.
                 </p>
                 <p>
                   <strong>Mitigation:</strong> Implement automated data cleaning at the ingestion layer to filter noisy sensor signals. Standardize all data models using shared keys: <em>train number, station code, and UTC timestamp</em>.
@@ -1404,7 +1404,7 @@
             <span class="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-black uppercase">Days 31–60: Prototype</span>
             <h4 class="text-xs font-bold text-slate-900 mt-2 mb-1">Back-Testing & Validation</h4>
             <p class="text-[11px] text-slate-600 leading-relaxed">
-              Back-test the delay ML model against historical Digitraffic controller baselines. Validate deterministic SQL claim rules against past Helsinki–Oulu disruptions.
+              Back-test the delay ML model against historical Digitraffic controller baselines. Validate deterministic claim rules against past Helsinki–Oulu disruptions.
             </p>
           </div>
 
