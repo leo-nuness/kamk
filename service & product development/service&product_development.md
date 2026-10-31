@@ -30,3 +30,30 @@ test marketing
 launch / commercialization
 continuous development
 
+
+
+## 2026-10-27
+### Video notes
+Change from google to AI (but now google also have AI)
+New agents that automate tasks
+Higher pressure on prices - ai agents researching
+
+we dont have ads YET
+customers funnel entirely on AI platform
+
+avoid invisibility (SEO now it's on AI)
+best way to show up is by third party reviews and news
+
+customer center becomes a sales center (at the same time) - increase potential for upselling
+
+hyper personalization
+- bigger potential than thought. agent that works as a coach. example: loreal beauty agent
+
+emotional AI
+
+in the future, being real and belonging will be the most valued (belonging as a service)
+
+un AI tification
+- making mistakes and less polite answers will be valuated
+
+personalize the agents, to have the brand shape and style
