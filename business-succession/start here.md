@@ -6,6 +6,7 @@ Module 2 - https://edukainuu-my.sharepoint.com/:v:/g/personal/leonardonunesmorei
 Module 3 - https://edukainuu-my.sharepoint.com/:v:/g/personal/leonardonunesmoreiramiranda_kamk_fi/IQDguIu5Hz3PRahWBTaIbthtASVq5RuaDJaqxZzF57KMYd0?e=jCjVbx
 Module 4 - https://edukainuu-my.sharepoint.com/:v:/g/personal/leonardonunesmoreiramiranda_kamk_fi/IQDguIu5Hz3PRahWBTaIbthtASVq5RuaDJaqxZzF57KMYd0?e=jCjVbx
 
-All the diary registers are available in this folder.
+All the diary registers are available in this folder:
+https://github.com/leo-nuness/kamk/tree/main/business-succession
 
 Thank you!
